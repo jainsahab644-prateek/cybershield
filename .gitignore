@@ -12,6 +12,7 @@ backend/coverage/
 backend/logs/
 backend/*.log
 *.log
+node_modules/
 !.env.example
 !.env.production.example
-!.env.docker.example
+!backend/.env.render
