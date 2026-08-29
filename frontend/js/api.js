@@ -13,7 +13,7 @@
     API_BASE_URL = configuredBase.replace(/\/$/, '');
   } else if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     // Production on Netlify — point to Render backend
-    API_BASE_URL = 'https://cybershield-backend.onrender.com/api/v1';
+    API_BASE_URL = 'https://cybershield-backend-gw3t.onrender.com/api/v1';
   } else {
     // Local development — backend is on same machine
     API_BASE_URL = '/api/v1';
