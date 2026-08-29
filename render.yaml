@@ -1,2 +1,36 @@
-build:
-  startCommand: node scripts/database-migrate.js && node src/server.js
+services:
+  - type: web
+    name: cybershield-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node scripts/database-migrate.js && node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: DEMO_MODE
+        value: "true"
+      - key: DEV_OTP
+        value: "123456"
+      - key: EMAIL_PROVIDER
+        value: development
+      - key: AI_PROVIDER
+        value: mock
+      - key: DB_CLIENT
+        value: sqlite
+      - key: DATABASE_PATH
+        value: ./data/cybershield.db
+      - key: EVIDENCE_STORAGE_PATH
+        value: ./private_uploads/evidence
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+      - key: CLIENT_ORIGIN
+        value: https://cybersheildgov.netlify.app
+      - key: CLIENT_ORIGINS
+        value: https://cybersheildgov.netlify.app,http://localhost:5000,http://localhost:5500
+      - key: SESSION_SECRET
+        value: c3219aa70926d1afaf371471e87c39eadf4ae2ab7f66c39be3a1d317d8e05b74
+      - key: IDENTIFIER_HASH_SECRET
+        value: a9028bf8134710185e49129038ba981d39d784a9e102837190e01238479b1837
