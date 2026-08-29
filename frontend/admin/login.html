@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to the protected CyberShield administration workspace.">
+  <meta name="theme-color" content="#0b222a">
+  <title>Administrator Sign In | CyberShield</title>
+  <link rel="stylesheet" href="../css/styles.css?v=admin-login">
+  <link rel="stylesheet" href="../css/complaint.css?v=admin-login">
+  <link rel="stylesheet" href="../css/auth.css?v=admin-login">
+  <link rel="stylesheet" href="../css/admin.css?v=admin-login">
+  <script src="../js/api.js?v=admin-login" defer></script>
+  <script src="../js/auth-api.js?v=admin-login" defer></script>
+  <script src="../js/admin/admin-login.js?v=admin-login" defer></script>
+</head>
+<body class="admin-body admin-login-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <main id="main-content" class="admin-login-main">
+    <section class="admin-login-intro" aria-labelledby="admin-login-title">
+      <a class="admin-brand" href="../index.html"><span class="brand__mark" aria-hidden="true"><span>CS</span></span><span><strong>CyberShield</strong><small>Administration</small></span></a>
+      <p class="eyebrow eyebrow--light">Restricted workspace</p>
+      <h1 id="admin-login-title">Administrator sign in</h1>
+      <p>Review fictional complaints, suspicious-activity reports, and educational content. Every administrative API independently checks the signed-in user’s role.</p>
+      <ul class="admin-login-points"><li>Challenge data only</li><li>No government or police connection</li><li>All administrative changes are audited</li></ul>
+      <a class="text-link admin-login-back" href="../index.html">← Return to citizen portal</a>
+    </section>
+    <article class="auth-card admin-login-card" aria-labelledby="admin-access-heading">
+      <p class="prototype-chip">Administrator access</p>
+      <h2 id="admin-access-heading">Verify administrator access</h2>
+      <p class="auth-card__lead">This separate sign-in is only for the CyberShield administration area.</p>
+      <div class="development-notice" id="admin-demo-notice" role="note"><strong>Reviewer verification code: <span data-admin-otp>123456</span></strong><br>No SMS or email is sent.</div>
+      <p class="form-message" id="admin-auth-message" role="alert" tabindex="-1" hidden></p>
+      <form id="admin-request-form" novalidate>
+        <div class="field-group"><label for="admin-email">Administrator email</label><input id="admin-email" name="email" type="email" value="admin@cybershield.demo" readonly required aria-describedby="admin-email-help"><p class="field-help" id="admin-email-help">Configured specifically for the administration role.</p></div>
+        <button class="button button--primary" type="submit">Continue to verification</button>
+      </form>
+      <form id="admin-verify-form" novalidate hidden>
+        <div class="field-group"><label for="admin-name">Display name</label><input id="admin-name" name="fullName" type="text" value="CyberShield Administrator" minlength="2" maxlength="100" required></div>
+        <div class="field-group"><label for="admin-otp">Verification code</label><input id="admin-otp" name="otp" type="text" inputmode="numeric" pattern="[0-9]{6}" minlength="6" maxlength="6" autocomplete="one-time-code" required aria-describedby="admin-otp-help"><p class="field-help" id="admin-otp-help">Enter 123456. Never use an OTP from another service.</p></div>
+        <button class="button button--primary" type="submit">Verify and open admin panel</button>
+        <div class="resend-row"><button id="admin-resend" type="button">Prepare a new verification code</button><span id="admin-resend-status" aria-live="polite"></span></div>
+      </form>
+    </article>
+  </main>
+</body>
+</html>

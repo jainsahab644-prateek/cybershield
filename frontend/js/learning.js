@@ -1,0 +1,62 @@
+(()=>{
+  'use strict';
+  const api=window.CyberShieldApi;
+  const allowedCovers=new Set(['phishing-awareness.webp','payment-safety.webp','social-media-safety.webp','shopping-safety.webp','account-security.webp','privacy-safety.webp']);
+  const topicDetails={
+    'phishing-awareness':{icon:'✉',description:'Spot suspicious messages, links, and sign-in requests.',cover:'phishing-awareness.webp',alt:'Illustration of a suspicious mobile message being checked by a digital shield.'},
+    'financial-fraud':{icon:'₹',description:'Make safer choices around payments and money requests.',cover:'payment-safety.webp',alt:'Illustration of a digital payment protected from an urgent suspicious request.'},
+    'payment-safety':{icon:'₹',description:'Check payment requests before sending money.',cover:'payment-safety.webp',alt:'Illustration of a digital payment protected from an urgent suspicious request.'},
+    'social-media-safety':{icon:'◎',description:'Protect profiles, conversations, and shared information.',cover:'social-media-safety.webp',alt:'Illustration of social media privacy controls protected by a lock and shield.'},
+    'account-security':{icon:'◇',description:'Strengthen sign-in, recovery, and device security.',cover:'account-security.webp',alt:'Illustration of a secure account sign-in with two-step verification.'},
+    'online-shopping':{icon:'▱',description:'Check sellers, offers, and checkout requests.',cover:'shopping-safety.webp',alt:'Illustration of a shopping checkout protected by a digital shield.'},
+    'privacy':{icon:'◈',description:'Understand how to reduce unnecessary data sharing.',cover:'privacy-safety.webp',alt:'Illustration of personal information protected inside a privacy shield.'}
+  };
+  const takeawayByTopic={
+    'phishing-awareness':'Pause before opening unexpected links. Verify the request through a trusted channel and sign in through the official app or address you already know.',
+    'financial-fraud':'Never approve a payment because someone is creating urgency. Verify independently and keep OTPs, PINs, CVVs, and passwords private.',
+    'social-media-safety':'Review who can see your information, be cautious with unexpected contacts, and secure the account with a unique password and multi-factor authentication.',
+    'account-security':'Use a unique password, turn on multi-factor authentication, and keep recovery codes somewhere private and safe.'
+  };
+  const formatDate=value=>value?new Intl.DateTimeFormat('en-IN',{day:'numeric',month:'short',year:'numeric'}).format(new Date(value)):'';
+  const detailsFor=slug=>topicDetails[slug]||{icon:'○',description:'Practical guidance for safer digital decisions.',cover:'privacy-safety.webp',alt:'Illustration of personal information protected by a digital shield.'};
+  function coverFor(article){return allowedCovers.has(article.coverImage)?article.coverImage:detailsFor(article.category.slug).cover;}
+  function media(article,className='knowledge-card__media'){
+    const figure=document.createElement('figure');figure.className=className;
+    const fallback=document.createElement('span');fallback.className='media-fallback';fallback.textContent='CyberShield Learning';
+    const image=document.createElement('img');image.src=`../assets/images/learning/${coverFor(article)}`;image.width=960;image.height=540;image.loading='lazy';image.alt=detailsFor(article.category.slug).alt;
+    image.addEventListener('error',()=>figure.classList.add('has-image-error'),{once:true});figure.append(fallback,image);return figure;
+  }
+  function articleCard(article){
+    const card=document.createElement('article');card.className='knowledge-card';const body=document.createElement('div');body.className='knowledge-card__body';
+    const category=document.createElement('p');category.className='knowledge-card__category';category.textContent=article.category.name;
+    const title=document.createElement('h3');title.textContent=article.title;const summary=document.createElement('p');summary.className='knowledge-card__summary';summary.textContent=article.summary;
+    const meta=document.createElement('div');meta.className='knowledge-card__meta';const date=document.createElement('time');date.dateTime=article.publishedAt||'';date.textContent=formatDate(article.publishedAt);const read=document.createElement('span');read.textContent='Practical guide';meta.append(date,read);
+    const link=document.createElement('a');link.className='knowledge-card__link';link.href=`article.html?slug=${encodeURIComponent(article.slug)}`;link.innerHTML='<span>Read guide</span> <span aria-hidden="true">→</span>';
+    body.append(category,title,summary,meta,link);card.append(media(article),body);return card;
+  }
+  function topicCard(category,selectCategory){
+    const detail=detailsFor(category.slug),link=document.createElement('a');link.className='topic-card';link.href='#latest';
+    const icon=document.createElement('span');icon.className='topic-card__icon';icon.setAttribute('aria-hidden','true');icon.textContent=detail.icon;
+    const text=document.createElement('div'),title=document.createElement('strong'),description=document.createElement('p'),count=document.createElement('small');title.textContent=category.name;description.textContent=category.description||detail.description;count.textContent=`${category.articleCount} guide${category.articleCount===1?'':'s'}`;text.append(title,description,count);link.append(icon,text);link.addEventListener('click',()=>selectCategory(category.slug));return link;
+  }
+  function chip(label,value,state,load){const button=document.createElement('button');button.type='button';button.className='topic-chip';button.textContent=label;button.dataset.category=value;button.setAttribute('aria-pressed',String(state.category===value));button.addEventListener('click',()=>{state.category=value;document.querySelectorAll('.topic-chip').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));load();});return button;}
+  async function loadFaqs(){const host=document.querySelector('#learning-faqs');try{const response=await api.request('/learning/faqs?limit=5');const items=response.data.faqs;host.replaceChildren(...items.map(faq=>{const details=document.createElement('details'),summary=document.createElement('summary'),answer=document.createElement('p');summary.textContent=faq.question;answer.textContent=faq.answer;details.append(summary,answer);return details;}));if(!items.length){const p=document.createElement('p');p.textContent='No frequently asked questions are available yet.';host.append(p);}}catch{host.textContent='FAQs could not be loaded right now.';}}
+  async function loadResources(){const host=document.querySelector('#resource-grid');try{const response=await api.request('/learning/resources');host.replaceChildren(...response.data.resources.map(resource=>{const card=document.createElement('article');card.className='resource-card';const h=document.createElement('h3');h.textContent=resource.title;const p=document.createElement('p');p.textContent=resource.description;const a=document.createElement('a');a.href=resource.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open resource';const note=document.createElement('small');note.className='external-label';note.textContent='Opens an external website';card.append(h,p,a,note);return card;}));}catch{host.textContent='External resources could not be loaded right now.';}}
+  async function learningPage(){
+    const form=document.querySelector('#learning-filters'),latest=document.querySelector('#latest-articles'),featured=document.querySelector('#featured-guides'),topics=document.querySelector('#topic-grid'),chips=document.querySelector('#topic-chips'),live=document.querySelector('#learning-live'),empty=document.querySelector('#article-empty'),state={category:''};
+    async function load(){live.textContent='Loading learning guides…';const params=new URLSearchParams({page:'1',limit:'12',sort:form.sort.value});if(form.search.value.trim())params.set('search',form.search.value.trim());if(state.category)params.set('category',state.category);try{const response=await api.request(`/learning/articles?${params}`),items=response.data.articles;latest.replaceChildren(...items.map(articleCard));empty.hidden=items.length>0;live.textContent=items.length?`${response.data.pagination.total} learning guide${response.data.pagination.total===1?'':'s'} available.`:'';}catch(error){latest.replaceChildren();empty.hidden=false;empty.querySelector('h3').textContent='Learning guides could not be loaded.';empty.querySelector('p').textContent='Please try again in a moment.';live.textContent=error.message;}}
+    function selectCategory(value){state.category=value;chips.querySelectorAll('.topic-chip').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.category===value)));load();}
+    const [categoryResponse,latestResponse,featuredResponse]=await Promise.all([api.request('/learning/categories'),api.request('/learning/articles?limit=12&sort=newest'),api.request('/learning/articles?featured=true&limit=3&sort=newest')]);const categories=categoryResponse.data.categories;
+    topics.replaceChildren(...categories.map(category=>topicCard(category,selectCategory)));chips.append(chip('All topics','',state,load),...categories.map(category=>chip(category.name,category.slug,state,load)));
+    const featuredItems=[...featuredResponse.data.articles];for(const item of latestResponse.data.articles){if(featuredItems.length>=3)break;if(!featuredItems.some(existing=>existing.articleId===item.articleId))featuredItems.push(item);}featured.replaceChildren(...featuredItems.slice(0,3).map(articleCard));
+    form.addEventListener('submit',event=>{event.preventDefault();load();document.querySelector('#latest').scrollIntoView({behavior:'smooth',block:'start'});});form.sort.addEventListener('change',load);
+    empty.querySelector('button').addEventListener('click',()=>{form.reset();state.category='';chips.querySelectorAll('.topic-chip').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.category==='')));load();form.search.focus();});
+    document.querySelectorAll('.scam-card [data-search]').forEach(button=>button.addEventListener('click',()=>{form.search.value=button.dataset.search;state.category='';chips.querySelectorAll('.topic-chip').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.category==='')));load();document.querySelector('#latest').scrollIntoView({behavior:'smooth',block:'start'});}));
+    await load();loadFaqs();loadResources();
+  }
+  async function articlePage(){
+    const slug=new URLSearchParams(location.search).get('slug'),live=document.querySelector('#article-live');if(!slug){live.textContent='Article not found.';document.querySelector('#article-layout').hidden=true;return;}
+    try{const response=await api.request(`/learning/articles/${encodeURIComponent(slug)}`),article=response.data.article;document.title=`${article.title} | CyberShield`;document.querySelector('#article-title').textContent=article.title;document.querySelector('#article-breadcrumb').textContent=article.title;document.querySelector('#article-category').textContent=article.category.name;document.querySelector('#article-summary').textContent=article.summary;const date=document.querySelector('#article-date');date.dateTime=article.publishedAt||'';date.textContent=formatDate(article.publishedAt);window.CyberShieldMarkdown.render(article.content,document.querySelector('#article-content'));document.querySelector('#article-takeaway').textContent=takeawayByTopic[article.category.slug]||'Pause, verify through a trusted channel, and keep passwords and verification codes private.';const cover=document.querySelector('#article-cover');cover.src=`../assets/images/learning/${coverFor(article)}`;cover.alt=detailsFor(article.category.slug).alt;cover.addEventListener('error',()=>cover.parentElement.classList.add('has-image-error'),{once:true});document.querySelector('#related-guides').replaceChildren(...response.data.relatedArticles.slice(0,3).map(articleCard));live.textContent='';}catch(error){live.textContent=error.status===404?'Article not found.':error.message;document.querySelector('#article-layout').hidden=true;document.querySelector('.related-section').hidden=true;}}
+  if(document.querySelector('#latest-articles'))learningPage().catch(error=>{document.querySelector('#learning-live').textContent=error.message;});
+  if(document.querySelector('#article-content'))articlePage();
+})();

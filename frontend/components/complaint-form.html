@@ -1,0 +1,189 @@
+<div class="form-shell">
+  <nav class="step-progress" aria-label="Complaint progress">
+    <p class="step-progress__summary" id="step-summary" aria-live="polite"></p>
+    <ol id="step-indicator"></ol>
+  </nav>
+
+  <form id="complaint-form" class="complaint-form" novalidate>
+    <aside class="before-start" aria-labelledby="before-start-title"><div><h2 id="before-start-title" data-i18n="beforeStart">Before You Start</h2><p data-i18n="keepReady">If available, keep these ready:</p><ul><li data-i18n="readyDate">Approximate date and time</li><li data-i18n="readyScreens">Screenshots</li><li data-i18n="readySource">Phone number, username, or website involved</li><li data-i18n="readyTransaction">Transaction or reference ID if money was involved</li></ul></div><p class="credential-warning" data-i18n="neverEnter">Never enter passwords, OTPs, PINs, CVVs, or recovery codes.</p></aside>
+    <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
+
+    <fieldset class="form-step" data-step="type">
+      <legend>What happened?</legend>
+      <p class="step-intro">Confirm the suggested path and choose the closest description. You can change it before continuing.</p>
+      <div class="category-confirmation">
+        <span class="category-confirmation__icon" id="category-icon" aria-hidden="true"></span>
+        <div><small>Selected category</small><strong id="category-label"></strong></div>
+        <a href="report-crime.html">Change category</a>
+      </div>
+      <div class="field-group">
+        <label for="subcategory">Which option sounds closest? <span class="required-label">Required</span></label>
+        <select id="subcategory" name="subcategory" aria-describedby="subcategory-help subcategory-error">
+          <option value="">Select an incident type</option>
+        </select>
+        <p class="field-help" id="subcategory-help">Choose the closest match. You can explain the situation in your own words on the next step.</p>
+        <p class="field-error" id="subcategory-error" data-error-for="subcategory"></p>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="incident" hidden>
+      <legend>When and where?</legend>
+      <p class="step-intro">Tell us what happened and when. Use fictional or test information only.</p>
+      <div class="field-group">
+        <div class="label-row"><label for="incident_title">Short title for the incident <span class="required-label">Required</span></label><span class="character-count" data-counter-for="incident_title">0 / 150</span></div>
+        <input id="incident_title" name="incident_title" type="text" minlength="5" maxlength="150" placeholder="Suspicious payment request received" autocomplete="off" aria-describedby="incident-title-help incident_title-error">
+        <p class="field-help" id="incident-title-help">Use a short, neutral summary without account numbers or credentials.</p>
+        <p class="field-error" id="incident_title-error" data-error-for="incident_title"></p>
+      </div>
+      <div class="field-group">
+        <div class="label-row"><label for="incident_description">Tell us what happened <span class="required-label">Required</span></label><span class="character-count" data-counter-for="incident_description">0 / 5000</span></div>
+        <textarea id="incident_description" name="incident_description" rows="7" minlength="20" maxlength="5000" aria-describedby="description-help credential-warning incident_description-error"></textarea>
+        <p class="field-help" id="description-help">Explain the incident in your own words. Include only details you already possess.</p>
+        <p class="credential-warning" id="credential-warning"><strong>Keep credentials private:</strong> Never enter passwords, banking PINs, UPI PINs, CVVs, OTPs, authentication codes, or recovery keys.</p>
+        <p class="field-error" id="incident_description-error" data-error-for="incident_description"></p>
+      </div>
+      <div class="field-grid field-grid--three">
+        <div class="field-group">
+          <label for="incident_date"><span data-i18n="whenHappen">When did this happen?</span> <span class="required-label">Required</span></label>
+          <input id="incident_date" name="incident_date" type="date" aria-describedby="incident-date-help incident_date-error">
+          <details class="context-help" id="incident-date-help"><summary data-i18n="whyAsk">Why are we asking this?</summary><p data-i18n="dateWhy">An approximate date and time can help organize the incident information.</p></details>
+          <p class="field-error" id="incident_date-error" data-error-for="incident_date"></p>
+        </div>
+        <div class="field-group">
+          <label for="incident_time">Incident time <span class="optional-label">Optional</span></label>
+          <input id="incident_time" name="incident_time" type="time">
+        </div>
+        <div class="field-group">
+          <label for="platform">Platform <span class="optional-label">Optional</span></label>
+          <select id="platform" name="platform">
+            <option value="">Select a platform</option>
+            <option>Website</option><option>Email</option><option>Messaging App</option>
+            <option>Social Media</option><option>Phone Call</option><option>SMS</option>
+            <option>Payment App</option><option>Online Marketplace</option>
+            <option>Gaming Platform</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="conditional-questions" data-conditional="phishing" hidden><h2>About the suspicious message</h2><div class="field-grid"><div class="field-group"><label for="message_channel">Where did you receive the message?</label><select id="message_channel" name="message_channel"><option value="">Select an option</option><option>SMS</option><option>Email</option><option>Messaging App</option><option>Social Media</option><option>Website</option><option>Other</option></select></div><div class="field-group"><label for="suspicious_link_saved">Do you still have the suspicious link?</label><select id="suspicious_link_saved" name="suspicious_link_saved"><option value="">Select an option</option><option value="yes">Yes</option><option value="no">No</option><option value="not_sure">Not sure</option></select></div></div></div>
+      <div class="conditional-questions" data-conditional="account" hidden><h2>About the affected account</h2><div class="field-grid"><div class="field-group"><label for="affected_service">Which service or account was affected?</label><input id="affected_service" name="affected_service" type="text" maxlength="100" placeholder="For example: email or social media"></div><div class="field-group"><label for="account_access">Can you still access the account?</label><select id="account_access" name="account_access"><option value="">Select an option</option><option value="yes">Yes</option><option value="no">No</option><option value="not_sure">Not sure</option></select></div></div></div>
+      <div class="field-group">
+        <label for="incident_location">City / Location <span class="optional-label">Optional</span></label>
+        <input id="incident_location" name="incident_location" type="text" maxlength="200" placeholder="Jaipur, Rajasthan" autocomplete="off" aria-describedby="location-help">
+        <p class="field-help" id="location-help">Do not enter an exact home address.</p>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="source" hidden>
+      <legend>Who or what contacted you?</legend>
+      <p class="step-intro">This step is optional. Add only details you already have about the account, website, number or profile.</p>
+      <details class="context-help"><summary>Why are we asking this?</summary><p>These details can help distinguish the source without asking you to investigate it.</p></details>
+      <div class="safe-action-note" role="note"><strong>Do not investigate the source yourself.</strong> Do not contact a suspect, access another person’s account or device, track an IP address, or attempt to obtain private information.</div>
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="suspect_name">Name or display name <span class="optional-label">Optional</span></label>
+          <input id="suspect_name" name="suspect_name" type="text" maxlength="100" placeholder="Name or display name, if known" autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label for="suspect_username">Username or handle <span class="optional-label">Optional</span></label>
+          <input id="suspect_username" name="suspect_username" type="text" maxlength="150" placeholder="Profile username or handle" autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label for="suspect_phone">Phone number <span class="optional-label">Optional</span></label>
+          <input id="suspect_phone" name="suspect_phone" type="tel" inputmode="tel" maxlength="16" placeholder="+919999999999" autocomplete="off" aria-describedby="suspect_phone-error">
+          <p class="field-error" id="suspect_phone-error" data-error-for="suspect_phone"></p>
+        </div>
+        <div class="field-group">
+          <label for="suspect_email">Email address <span class="optional-label">Optional</span></label>
+          <input id="suspect_email" name="suspect_email" type="email" maxlength="254" placeholder="unknown@example.com" autocomplete="off" aria-describedby="suspect_email-error">
+          <p class="field-error" id="suspect_email-error" data-error-for="suspect_email"></p>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="suspect_website">Website or profile URL <span class="optional-label">Optional</span></label>
+        <input id="suspect_website" name="suspect_website" type="url" maxlength="2048" placeholder="https://example.com" autocomplete="off" aria-describedby="suspect_website-error">
+        <p class="field-error" id="suspect_website-error" data-error-for="suspect_website"></p>
+      </div>
+      <div class="later-phase-note" role="note"><span aria-hidden="true">i</span><p><strong>Supporting files are optional.</strong> Signed-in users can attach private evidence on the Evidence step; anonymous complaints continue without attachments.</p></div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="financial" hidden>
+      <legend>Did you lose any money?</legend>
+      <div class="financial-warning" role="note"><strong>If money was just transferred fraudulently, contact your bank or payment provider immediately.</strong><span>CyberShield cannot stop, reverse, investigate, or recover financial transactions.</span></div>
+      <fieldset class="choice-group field-group">
+        <legend>Did you lose money? <span class="required-label">Required</span></legend>
+        <div class="choice-row">
+          <label><input type="radio" name="lost_money" value="yes"> <span>Yes</span></label>
+          <label><input type="radio" name="lost_money" value="no"> <span>No</span></label>
+        </div>
+        <p class="field-error" id="lost_money-error" data-error-for="lost_money"></p>
+      </fieldset>
+      <div class="field-group" data-financial-loss-group hidden>
+        <label for="financial_loss">Approximate financial loss <span class="required-label">Required</span></label>
+        <div class="money-input"><span aria-hidden="true">₹</span><input id="financial_loss" name="financial_loss" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0" aria-describedby="loss-help financial_loss-error"></div>
+        <p class="field-help" id="loss-help">Enter an approximate amount. Do not enter bank, card, or payment credentials.</p>
+        <p class="field-error" id="financial_loss-error" data-error-for="financial_loss"></p>
+      </div>
+      <div class="field-grid"><div class="field-group"><label for="payment_method" data-i18n="paymentMethod">Payment method</label><select id="payment_method" name="payment_method"><option value="">Select an option</option><option>UPI / Payment App</option><option>Bank Transfer</option><option>Card</option><option>Digital Wallet</option><option>Cash Deposit</option><option>Other</option></select></div><div class="field-group"><label for="transaction_reference" data-i18n="transactionId">Transaction / reference ID</label><input id="transaction_reference" name="transaction_reference" type="text" maxlength="100" autocomplete="off" aria-describedby="transaction-reference-help"><p class="field-help" id="transaction-reference-help">Enter only the reference ID, never a PIN, OTP, CVV, or password.</p></div></div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="complainant" hidden>
+      <legend>Your details</legend>
+      <div class="privacy-message" role="note"><strong>Protect sensitive information</strong><p>Do not submit identity numbers, banking credentials, passwords, OTPs, PINs, CVVs, or recovery codes.</p></div>
+      <div class="field-group">
+        <label for="complainant_name">Name <span class="required-label">Required</span></label>
+        <input id="complainant_name" name="complainant_name" type="text" minlength="2" maxlength="100" autocomplete="name" aria-describedby="complainant_name-error">
+        <p class="field-error" id="complainant_name-error" data-error-for="complainant_name"></p>
+      </div>
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="complainant_email">Email <span class="required-label">Required</span></label>
+          <input id="complainant_email" name="complainant_email" type="email" maxlength="254" placeholder="citizen@example.com" autocomplete="email" aria-describedby="complainant_email-error">
+          <p class="field-error" id="complainant_email-error" data-error-for="complainant_email"></p>
+        </div>
+        <div class="field-group">
+          <label for="complainant_phone">Phone <span class="required-label">Required</span></label>
+          <input id="complainant_phone" name="complainant_phone" type="tel" inputmode="tel" maxlength="16" placeholder="+919876543210" autocomplete="tel" aria-describedby="complainant_phone-error">
+          <p class="field-error" id="complainant_phone-error" data-error-for="complainant_phone"></p>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="evidence" hidden>
+      <legend data-i18n="addEvidence">Add screenshots or documents</legend>
+      <p class="step-intro">Add screenshots, photos, or PDF documents that support your complaint.</p>
+      <div class="credential-warning" role="note"><strong>Keep credentials private:</strong> Do not upload passwords, OTPs, PINs, CVVs, recovery codes, private keys, or other authentication credentials.</div>
+      <div class="evidence-picker">
+        <label class="evidence-picker__label" for="complaint-evidence">Choose fictional evidence files</label>
+        <input id="complaint-evidence" name="evidence" type="file" multiple accept=".jpg,.jpeg,.png,.pdf" aria-describedby="evidence-constraints evidence-error evidence-status" data-evidence-input>
+        <p class="field-help" id="evidence-constraints" data-evidence-constraints>JPG, JPEG, PNG, or PDF. Up to 5 MB per file and 5 files per complaint.</p>
+        <p class="evidence-signed-out" data-evidence-signed-out role="note">Sign in before starting a complaint to attach evidence. Anonymous complaints remain available without attachments.</p>
+        <p class="field-error" id="evidence-error" data-evidence-error></p>
+        <p class="evidence-live" id="evidence-status" data-evidence-status role="status" aria-live="polite"></p>
+        <ul class="evidence-preview" data-evidence-preview aria-label="Selected evidence files"></ul>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-step" data-step="review" hidden>
+      <legend>Review your complaint</legend>
+      <p class="step-intro">Check the fictional information carefully. Use the Edit buttons to return to a section.</p>
+      <div class="review-summary" id="review-summary"></div>
+      <div class="confirmation-panel">
+        <div class="field-group checkbox-group">
+          <label><input type="checkbox" id="confirm_no_credentials" name="confirm_no_credentials"> <span>I confirm that I have not entered passwords, PINs, OTPs, CVVs, recovery codes, or other authentication credentials.</span></label>
+          <p class="field-error" id="confirm_no_credentials-error" data-error-for="confirm_no_credentials"></p>
+        </div>
+        <div class="field-group checkbox-group">
+          <label><input type="checkbox" id="confirm_demo" name="confirm_demo"> <span>I understand CyberShield is an independent service experience and does not submit this complaint to a government or law-enforcement authority.</span></label>
+          <p class="field-error" id="confirm_demo-error" data-error-for="confirm_demo"></p>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button class="button button--secondary" type="button" id="previous-step" hidden><span aria-hidden="true">←</span> Back</button>
+      <div class="draft-action"><button class="text-link" type="button" id="save-draft" data-i18n="saveLater">Save and Continue Later</button><p id="draft-status" class="draft-status" aria-live="polite">Drafts are saved in this browser only.</p></div>
+      <button class="button button--primary" type="button" id="next-step">Continue <span aria-hidden="true">→</span></button>
+      <button class="button button--primary" type="submit" id="submit-complaint" hidden>Submit Complaint <span aria-hidden="true">→</span></button>
+    </div>
+  </form>
+</div>

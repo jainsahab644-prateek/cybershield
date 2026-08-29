@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /pages/dashboard.html
+Disallow: /pages/complaint-details.html
+Disallow: /pages/notifications.html
+Disallow: /pages/my-suspicious-reports.html
+
+# CyberShield is a demonstration project, not an official reporting authority.

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Describe a fictional cyber incident and get a guided reporting path in the CyberShield public-service innovation experience.">
+  <meta name="theme-color" content="#102a33"><title>Report a Cyber Incident | CyberShield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/styles.css?v=hackathon-v2"><link rel="stylesheet" href="../css/complaint.css?v=hackathon-v2">
+  <script src="../js/theme.js"></script><script src="../js/i18n.js?v=phase10" defer></script><script src="../js/app.js?v=submission" defer></script><script src="../js/api.js?v=submission" defer></script><script src="../js/incident-assistant.js?v=submission" defer></script>
+</head>
+<body class="interior-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <header class="site-header">
+    <div class="brand-row container"><a class="brand" href="../index.html" aria-label="CyberShield home"><span class="brand__mark" aria-hidden="true"><span>CS</span></span><span class="brand__name">Cyber<span>Shield</span><small>Clear guidance for safer action</small></span></a><button class="dark-mode-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="icon-moon" aria-hidden="true">🌙</span><span class="icon-sun" aria-hidden="true">☀️</span></button><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation"><span class="menu-button__icon" aria-hidden="true"></span><span>Menu</span></button></div>
+    <nav class="main-nav" id="primary-navigation" aria-label="Main navigation"><div class="container main-nav__inner"><a href="../index.html">Home</a><a class="is-active" aria-current="page" href="report-crime.html">Report an incident</a><a href="track-complaint.html">Track a Complaint</a><a href="../index.html#tips">Safety guidance</a><a href="../index.html#help">Help</a></div></nav>
+  </header>
+  <main id="main-content">
+    <section class="page-hero report-start-hero" aria-labelledby="page-title"><div class="container page-hero__inner"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>Report an incident</span></nav><p class="eyebrow eyebrow--light">No technical knowledge needed</p><h1 id="page-title">What happened?</h1><p class="page-hero__summary">Describe the situation in simple words or choose the closest option. You stay in control of the category.</p></div></section>
+
+    <section class="incident-start" aria-labelledby="assistant-title"><div class="container incident-start__grid">
+      <div class="assistant-panel">
+        <p class="context-chip">Optional complaint assistant</p>
+        <h2 id="assistant-title">Describe what happened</h2>
+        <p>Tell me what happened and I can help you understand the most relevant reporting path.</p>
+        <form id="assistant-form" novalidate>
+          <div class="field-group"><label for="incident-description">Tell us in your own words <span class="required-label">Required</span></label><textarea id="incident-description" name="description" rows="6" minlength="20" maxlength="2000" placeholder="For example: I received a message saying my electricity would be disconnected and I was asked to make an urgent payment using a link." aria-describedby="assistant-help assistant-safety assistant-error"></textarea><div class="assistant-field-meta"><p class="field-help" id="assistant-help">20–2,000 characters. Only this description is used for the suggestion.</p><span id="assistant-count">0 / 2000</span></div><p class="credential-warning" id="assistant-safety"><strong>Never enter:</strong> OTPs, UPI or card PINs, passwords, CVVs, recovery codes, private keys or seed phrases.</p><p class="field-error" id="assistant-error"></p></div>
+          <button class="button button--primary assistant-submit" type="submit" id="assistant-submit">Help Me Choose <span aria-hidden="true">→</span></button>
+          <p class="assistant-disclaimer">AI suggestions may be incorrect. You can always choose a different category.</p>
+          <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
+        </form>
+        <section class="assistant-result" id="assistant-result" aria-labelledby="assistant-result-title" tabindex="-1" hidden>
+          <div class="assistant-result__head"><div><h3 id="assistant-result-title" data-i18n="suggestedPath">Suggested Reporting Path</h3></div></div>
+          <strong class="assistant-category" id="assistant-category"></strong>
+          <h4 data-i18n="whyFit">Why this may fit</h4><p id="assistant-summary"></p>
+          <h4 data-i18n="keepInfo">Information you may want to keep ready</h4><ul id="assistant-useful-info"></ul>
+          <div class="credential-warning"><strong>Never share</strong><p id="assistant-warning"></p></div>
+          <p class="assistant-uncertain" id="assistant-uncertain" hidden><strong>We’re not completely sure which category fits best.</strong> Review the likely options below or choose manually.</p>
+          <div class="assistant-result__actions"><button class="button button--primary" id="assistant-continue" type="button" data-i18n="continue">Continue</button><button class="button button--secondary" id="assistant-change" type="button" data-i18n="chooseAnother">Choose Another Category</button></div>
+        </section>
+      </div>
+
+      <aside class="quick-demo" aria-labelledby="quick-example-title"><p class="context-chip">Try an Example</p><h2 id="quick-example-title" data-i18n="example">Example scenario</h2><blockquote data-i18n="exampleText">I received a message saying my electricity connection would be disconnected unless I paid immediately through a link.</blockquote><button class="text-link" id="use-example" type="button"><span data-i18n="useExample">Use This Example</span> <span aria-hidden="true">→</span></button><hr><h3 data-i18n="urgent">Need Urgent Help?</h3><p data-i18n="urgentText">CyberShield does not handle emergencies. For urgent situations, use the appropriate official emergency or cybercrime reporting channel.</p></aside>
+    </div></section>
+
+    <section class="plain-choices" id="manual-choices" aria-labelledby="choices-title"><div class="container"><div class="choice-page__heading"><p class="eyebrow"><span></span> Prefer to choose yourself?</p><h2 id="choices-title">Pick the closest situation</h2><p>You do not need to know the official or technical name. You can change the incident type in the next step.</p></div><div class="citizen-choice-list">
+      <button type="button" data-category="financial_fraud" data-subcategory="other_financial_fraud"><span aria-hidden="true">₹</span><strong data-i18n="lostMoney">I lost money or received a suspicious payment request</strong><small>Payments, transfers, shopping, investments or urgent money requests</small></button>
+      <button type="button" data-category="other_cybercrime" data-subcategory="phishing"><span aria-hidden="true">↗</span><strong data-i18n="suspiciousLink">I received a suspicious link or message</strong><small>Email, SMS, messaging app or website</small></button>
+      <button type="button" data-category="other_cybercrime" data-subcategory="account_compromise"><span aria-hidden="true">⌁</span><strong data-i18n="accountCompromised">My account may have been compromised</strong><small>Lost access, unknown changes or security alerts</small></button>
+      <button type="button" data-category="safety_related" data-subcategory="impersonation"><span aria-hidden="true">◎</span><strong data-i18n="pretending">Someone is pretending to be me</strong><small>Fake profiles or identity misuse</small></button>
+      <button type="button" data-category="safety_related" data-subcategory="threatening_messages"><span aria-hidden="true">!</span><strong data-i18n="harassing">Someone is threatening or harassing me online</strong><small>Threats, stalking, bullying or repeated unwanted contact</small></button>
+      <button type="button" data-category="financial_fraud" data-subcategory="shopping_fraud"><span aria-hidden="true">□</span><strong data-i18n="shopping">I faced a problem while shopping online</strong><small>A seller disappeared, an item never arrived or a listing was deceptive</small></button>
+      <button type="button" data-category="other_cybercrime" data-subcategory="other_cybercrime"><span aria-hidden="true">?</span><strong data-i18n="notSure">I'm not sure</strong><small>Start with the general path and explain it in your own words</small></button>
+    </div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer__grid"><div><a class="brand brand--footer" href="../index.html"><span class="brand__mark" aria-hidden="true"><span>CS</span></span><span class="brand__name">Cyber<span>Shield</span></span></a><p class="footer__disclosure">CyberShield is an independent reimagining of the cybercrime reporting experience created for a public-service innovation challenge. It is not an official government service.</p></div><nav aria-label="Action links"><h2>Take action</h2><a href="report-crime.html">Report an incident</a><a href="track-complaint.html">Track a Complaint</a></nav><nav aria-label="Learning links"><h2>Learn</h2><a href="../index.html#tips">Safety guidance</a></nav><nav aria-label="Support links"><h2>Support</h2><a href="../index.html#help">Contact & help</a></nav></div><div class="container footer__legal"><p>© <span data-current-year>2026</span> CyberShield.</p><p>Use fictional information only.</p></div></footer>
+</body></html>

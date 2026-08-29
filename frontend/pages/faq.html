@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Clear answers about online risks, reporting cybercrime, and CyberShield safety boundaries.">
+  <title>Frequently Asked Questions | CyberShield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/styles.css?v=phase9-v2">
+  <link rel="stylesheet" href="../css/learning.css?v=phase9">
+  <script src="../js/theme.js"></script>
+  <script src="../js/api.js?v=phase9" defer></script>
+  <script src="../js/faq-page.js?v=phase9" defer></script>
+  <script src="../js/i18n.js?v=phase10" defer></script><script src="../js/app.js?v=copy-polish" defer></script>
+</head>
+<body class="learning-page">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header">
+  <div class="brand-row container">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark" aria-hidden="true"><span>CS</span></span>
+      <span class="brand__name">Cyber<span>Shield</span><small>Awareness • Support • Action</small></span>
+    </a>
+    <button class="dark-mode-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="icon-moon" aria-hidden="true">🌙</span>
+      <span class="icon-sun" aria-hidden="true">☀️</span>
+    </button>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <span class="menu-button__icon" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+  </div>
+  <nav class="main-nav" id="primary-navigation" aria-label="Main navigation">
+    <div class="container main-nav__inner">
+      <a href="../index.html">Home</a>
+      <a href="learning.html">Learning Corner</a>
+      <a class="is-active" aria-current="page" href="faq.html">FAQs</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="report-crime.html">Report an incident</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content">
+  <section class="knowledge-hero">
+    <div class="container knowledge-hero__layout">
+      <div class="knowledge-hero__copy">
+        <p class="knowledge-kicker">Clear Answers • Cyber Safety</p>
+        <h1>Frequently Asked<br><span>Questions.</span></h1>
+        <p>Find clear, plain-language answers about online security risks, safer digital habits, and CyberShield's reporting boundaries.</p>
+        <div class="knowledge-hero__actions">
+          <a class="button button--primary" href="#faq-search-section">Search answers</a>
+          <a class="knowledge-text-link" href="learning.html">Browse learning guides <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq-search-section" class="learning-search-band" aria-labelledby="faq-search-heading">
+    <div class="container">
+      <form id="faq-filters" class="learning-search" role="search" onsubmit="event.preventDefault();">
+        <div>
+          <h2 id="faq-search-heading">How can we help you?</h2>
+          <p>Search by question, risk type, or safety topic keyword.</p>
+        </div>
+        <div class="learning-search__control">
+          <label class="sr-only" for="faq-search-input">Search FAQs</label>
+          <span aria-hidden="true">⌕</span>
+          <input id="faq-search-input" name="search" type="search" maxlength="150" autocomplete="off" placeholder="Search FAQs (e.g., payment link, phishing, OTP, police)...">
+        </div>
+        <label class="learning-sort">Filter Category
+          <select id="faq-category-select" name="category" aria-label="Filter FAQ by Category">
+            <option value="">All categories</option>
+          </select>
+        </label>
+      </form>
+    </div>
+  </section>
+
+  <div class="container knowledge-main faq-page-body">
+    <div id="faq-topic-chips" class="topic-chips" aria-label="Filter FAQs by category"></div>
+
+    <div class="faq-meta-bar">
+      <p id="faq-live" class="faq-live-badge" role="status" aria-live="polite">
+        <span class="faq-live-dot" aria-hidden="true"></span>
+        <span>Loading FAQs…</span>
+      </p>
+    </div>
+
+    <section id="faq-list" class="faq-accordion" aria-label="Frequently asked questions list"></section>
+
+    <div id="faq-empty" class="learning-empty" hidden>
+      <h3>No FAQs match your search.</h3>
+      <p>Try searching for a different keyword or select another category filter.</p>
+      <button id="faq-clear-btn" class="button button--secondary" type="button">Clear search filters</button>
+    </div>
+
+    <section class="faq-help-band" aria-labelledby="faq-help-heading">
+      <div class="faq-help-content">
+        <h2 id="faq-help-heading">Still have questions or facing an emergency?</h2>
+        <p>If you've lost money, had your account compromised, or encountered a suspicious website, take action now.</p>
+      </div>
+      <div class="faq-help-actions">
+        <a class="button button--primary" href="report-crime.html">Report an Incident</a>
+        <a class="button button--ghost" href="learning.html">Explore Learning Corner</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer__legal">
+    <p>© 2026 CyberShield. Learning content created for demonstration and education.</p>
+    <p class="footer__disclosure">CyberShield is an independent reimagining of the cybercrime reporting experience. It is not an official government service.</p>
+  </div>
+</footer>
+</body>
+</html>
+

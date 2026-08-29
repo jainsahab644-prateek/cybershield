@@ -1,0 +1,11 @@
+'use strict';
+const repository=require('../repositories/initiative.repository');const audit=require('../repositories/audit.repository');const HttpError=require('../utils/httpError');const {validateExternalUrl}=require('../utils/externalUrl');
+function page(total,f){return{page:f.page,limit:f.limit,total,totalPages:Math.max(1,Math.ceil(total/f.limit))};}
+function normalize(input){const value={...input};if(value.officialSourceUrl)value.officialSourceUrl=validateExternalUrl(value.officialSourceUrl);else if(value.officialSourceUrl==='')value.officialSourceUrl=null;if(value.sourceVerifiedAt==='')value.sourceVerifiedAt=null;return value;}
+function list(filters,publicOnly=true){const result=repository.list(filters,publicOnly);return{initiatives:result.rows,pagination:page(result.total,filters)};}
+function detail(slug){const initiative=repository.findBySlug(slug);if(!initiative)throw new HttpError(404,'Initiative not found.');return{initiative};}
+function adminDetail(id){const initiative=repository.findById(id);if(!initiative)throw new HttpError(404,'Initiative not found.');return initiative;}
+function log(admin,ip,action,id,metadata={}){audit.createAudit({actorUserId:admin.internalId,actorRole:'admin',action,entityType:'initiative',entityPublicId:id,metadata,ipAddress:ip,createdAt:new Date().toISOString()});}
+function create(input,admin,ip){const value=repository.create(normalize(input));log(admin,ip,'initiative_created',value.initiativeId,{category:value.category,isDemo:value.isDemo});return value;}
+function update(id,input,admin,ip){const before=adminDetail(id),clean=normalize(input),merged={...before,...clean};if(merged.endDate&&merged.endDate<merged.startDate)throw new HttpError(400,'End date must be on or after start date.');if(!merged.isDemo&&!merged.officialSourceUrl)throw new HttpError(400,'A real initiative requires an official HTTPS source.');const value=repository.update(id,clean);if(!value)throw new HttpError(404,'Initiative not found.');log(admin,ip,'initiative_updated',id,{category:value.category});if(before.isFeatured!==value.isFeatured)log(admin,ip,value.isFeatured?'initiative_featured':'initiative_unfeatured',id);if(before.isActive!==value.isActive)log(admin,ip,value.isActive?'initiative_activated':'initiative_deactivated',id);return value;}
+module.exports={adminDetail,create,detail,list,update};

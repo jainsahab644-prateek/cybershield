@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CyberShield guides citizens through a simple fictional cyber-incident reporting journey.">
+  <meta name="theme-color" content="#102a33">
+  <title>CyberShield | Clear cyber incident guidance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=citizen-focus">
+  <link rel="stylesheet" href="css/auth.css?v=phase4">
+  <link rel="stylesheet" href="css/complaint.css?v=citizen-focus">
+  <link rel="stylesheet" href="css/initiatives.css?v=initiatives">
+  <script src="js/theme.js"></script>
+  <script src="js/i18n.js?v=citizen-focus" defer></script>
+  <script src="js/app.js?v=citizen-focus" defer></script>
+  <script src="js/api.js?v=phase9" defer></script>
+  <script src="js/auth-api.js?v=phase4" defer></script>
+  <script src="js/main.js?v=phase4" defer></script>
+  <script src="js/home-content.js?v=phase9" defer></script>
+  <script src="js/initiative-ui.js?v=initiatives" defer></script>
+  <script src="js/home-initiatives.js?v=initiatives" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="utility-bar">
+      <div class="container utility-bar__inner">
+        <p>Cyber safety guidance for everyone</p>
+        <nav aria-label="Utility navigation">
+          <a href="#learn">Learning corner</a>
+          <a href="#faq">FAQs</a>
+          <a href="#help">Help</a>
+          <div class="text-size" aria-label="Text size controls">
+            <button type="button" data-font-action="decrease" aria-label="Decrease text size">A−</button>
+            <button type="button" data-font-action="reset" aria-label="Reset text size">A</button>
+            <button type="button" data-font-action="increase" aria-label="Increase text size">A+</button>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="brand-row container">
+      <a class="brand" href="#top" aria-label="CyberShield home">
+        <span class="brand__mark" aria-hidden="true"><span>CS</span></span>
+        <span class="brand__name">Cyber<span>Shield</span><small>Clear guidance for safer action</small></span>
+      </a>
+      <button class="dark-mode-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+      </button>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="menu-button__icon" aria-hidden="true"></span>
+        <span data-i18n="menu">Menu</span>
+      </button>
+    </div>
+    <nav class="main-nav" id="primary-navigation" aria-label="Main navigation">
+      <div class="container main-nav__inner">
+        <a class="is-active" aria-current="page" href="#top" data-i18n="home">Home</a>
+        <a href="pages/report-crime.html" data-i18n="report">Report an incident</a>
+        <a href="pages/track-complaint.html" data-i18n="track">Track Complaint</a>
+        <a href="#how-it-works" data-i18n="howWorks">How it works</a>
+        <a href="#learn" data-i18n="learn">Learning Corner</a>
+        <a href="#help" data-i18n="help">Help</a>
+        <a href="pages/login.html" data-auth-visible="guest" data-i18n="signIn">Sign in</a>
+        <a href="pages/dashboard.html" data-auth-visible="user" data-i18n="myComplaints" hidden>My Complaints</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow eyebrow--light"><span></span><span data-i18n="simpleGuidance">Simple guidance, one step at a time</span></p>
+          <h1 id="hero-title">Not sure how to report a <em>cyber incident?</em></h1>
+          <p class="hero__summary" data-i18n="heroSummary">Describe what happened in simple words and CyberShield will guide you through the right reporting steps.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="pages/report-crime.html">
+              <span data-i18n="reportCyber">Report a Cyber Incident</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="button button--ghost" href="pages/track-complaint.html" data-i18n="track">Track Complaint</a>
+          </div>
+          <p class="hero__scope">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+            <span data-i18n="noTechnical">No technical category knowledge needed.</span>
+          </p>
+        </div>
+        <aside class="decision-card" aria-labelledby="start-title">
+          <p class="decision-card__label" data-i18n="beforeStart">Before You Start</p>
+          <h2 id="start-title" data-i18n="keepReady">If available, keep these ready:</h2>
+          <ul class="simple-ready-list">
+            <li data-i18n="readyDate">Approximate date and time</li>
+            <li data-i18n="readyScreens">Screenshots</li>
+            <li data-i18n="readySource">Phone number, username, or website involved</li>
+            <li data-i18n="readyTransaction">Transaction or reference ID if money was involved</li>
+          </ul>
+          <p class="credential-warning" data-i18n="neverEnter">🔒 Never enter passwords, OTPs, PINs, CVVs, or recovery codes.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section report-gateway" aria-labelledby="report-start-title">
+      <div class="container section-heading section-heading--split">
+        <div>
+          <p class="eyebrow"><span></span><span data-i18n="startReport">Start your report</span></p>
+          <h2 id="report-start-title" data-i18n="whatHappened">What happened?</h2>
+        </div>
+        <div>
+          <p data-i18n="startReportText">Choose a situation or describe what happened. You can review every answer before submitting.</p>
+          <a class="button button--primary" href="pages/report-crime.html" data-i18n="reportCyber">Report a Cyber Incident</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section example-scenario" aria-labelledby="example-title">
+      <div class="container">
+        <article class="example-scenario__card">
+          <div>
+            <p class="eyebrow"><span></span><span data-i18n="example">Example scenario</span></p>
+            <h2 id="example-title" data-i18n="exampleText">I received a message saying my electricity connection would be disconnected unless I paid immediately through a link.</h2>
+          </div>
+          <a class="button button--secondary" href="pages/report-crime.html?scenario=electricity" data-i18n="useExample">Use This Example</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section hackathon-how" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow"><span></span><span data-i18n="howWorks">How it works</span></p>
+          <h2 id="how-title">A clear path from incident to complaint</h2>
+        </div>
+        <ol class="citizen-journey">
+          <li><span>1</span><strong data-i18n="tellWhat">Tell us what happened</strong></li>
+          <li><span>2</span><strong data-i18n="getGuidance">Get guidance</strong></li>
+          <li><span>3</span><strong data-i18n="completeForm">Complete a simple form</strong></li>
+          <li><span>4</span><strong data-i18n="reviewSubmit">Review and submit</strong></li>
+          <li><span>5</span><strong data-i18n="trackStatus">Track your status</strong></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section common-incidents" aria-labelledby="incident-types-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"><span></span><span data-i18n="commonTypes">Common incident types</span></p>
+          <h2 id="incident-types-title">Choose the sentence that sounds closest</h2>
+          <p>You can change your choice before submitting.</p>
+        </div>
+        <div class="citizen-choice-list">
+          <a href="pages/report-crime.html?choice=money"><span aria-hidden="true">₹</span><strong data-i18n="lostMoney">I lost money or received a suspicious payment request</strong></a>
+          <a href="pages/report-crime.html?choice=phishing"><span aria-hidden="true">↗</span><strong data-i18n="suspiciousLink">I received a suspicious link or message</strong></a>
+          <a href="pages/report-crime.html?choice=account"><span aria-hidden="true">⌁</span><strong data-i18n="accountCompromised">My account may have been compromised</strong></a>
+          <a href="pages/report-crime.html?choice=impersonation"><span aria-hidden="true">◎</span><strong data-i18n="pretending">Someone is pretending to be me</strong></a>
+          <a href="pages/report-crime.html?choice=harassment"><span aria-hidden="true">!</span><strong data-i18n="harassing">Someone is threatening or harassing me online</strong></a>
+          <a href="pages/report-crime.html?choice=shopping"><span aria-hidden="true">□</span><strong data-i18n="shopping">I faced a problem while shopping online</strong></a>
+          <a href="pages/report-crime.html?choice=unsure"><span aria-hidden="true">?</span><strong data-i18n="notSure">I'm not sure</strong></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section initiative-home" id="initiatives" aria-labelledby="initiative-home-title" hidden>
+      <div class="container">
+        <div class="section-heading initiative-heading">
+          <div>
+            <p class="eyebrow"><span></span><span data-i18n="initiatives">Current awareness initiatives</span></p>
+            <h2 id="initiative-home-title">Simple guidance from current campaigns</h2>
+          </div>
+          <a class="button button--secondary" href="pages/initiatives.html" data-i18n="viewAllInitiatives">View All Initiatives</a>
+        </div>
+        <div class="initiative-grid" id="home-initiatives" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section tips" id="tips" aria-labelledby="tips-title">
+      <div class="container">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow"><span></span><span data-i18n="quickTips">Quick safety tips</span></p>
+          <h2 id="tips-title">Pause. Verify. Protect. Record.</h2>
+        </div>
+        <ol class="tip-steps">
+          <li><span>01</span><div><h3>Pause</h3><p>Do not let urgency force a quick decision.</p></div></li>
+          <li><span>02</span><div><h3>Verify</h3><p>Use a contact method you already trust.</p></div></li>
+          <li><span>03</span><div><h3>Protect</h3><p>Keep passwords and payment codes private.</p></div></li>
+          <li><span>04</span><div><h3>Record</h3><p>Save dates, messages, links, and references.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section learning" id="learn" aria-labelledby="learn-title">
+      <div class="container learning__grid">
+        <div class="learning__intro">
+          <p class="eyebrow eyebrow--light"><span></span><span data-i18n="learningResources">Featured safety resources</span></p>
+          <h2 id="learn-title" data-i18n="learn">Learning Corner</h2>
+          <p>Three practical guides for safer everyday decisions.</p>
+          <a class="text-link text-link--light" href="pages/learning.html"><span data-i18n="viewAll">View All</span> <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="learning-cards" id="home-learning" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq__grid">
+        <div class="faq__intro">
+          <p class="eyebrow"><span></span><span data-i18n="faq">Frequently asked questions</span></p>
+          <h2 id="faq-title">Clear answers, without jargon</h2>
+          <a class="text-link" href="pages/faq.html"><span data-i18n="viewAll">View All</span> <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="accordion">
+          <article>
+            <h3><button type="button" aria-expanded="true" aria-controls="faq-answer-1" id="faq-question-1">Is CyberShield an official reporting portal?<span aria-hidden="true"></span></button></h3>
+            <div id="faq-answer-1" role="region" aria-labelledby="faq-question-1"><p>No. CyberShield is an independent reimagining and is not operated by a government or police authority.</p></div>
+          </article>
+          <article>
+            <h3><button type="button" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">What should I do first after financial fraud?<span aria-hidden="true"></span></button></h3>
+            <div id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden><p>Contact your bank or payment provider immediately using its verified app, website, or contact details.</p></div>
+          </article>
+          <article>
+            <h3><button type="button" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">What information should I never share?<span aria-hidden="true"></span></button></h3>
+            <div id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden><p>Never share passwords, OTPs, PINs, CVVs, or recovery codes.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="help" id="help" aria-labelledby="urgent-title">
+      <div class="container help__grid">
+        <div>
+          <p class="eyebrow eyebrow--light"><span></span><span>Support boundary</span></p>
+          <h2 id="urgent-title" data-i18n="urgent">Need Urgent Help?</h2>
+          <p data-i18n="urgentText">CyberShield does not handle emergencies. For urgent situations, use the appropriate official emergency or cybercrime reporting channel.</p>
+        </div>
+        <div class="help__actions">
+          <a class="button button--light" href="pages/report-crime.html" data-i18n="reportCyber">Report a Cyber Incident</a>
+          <a class="button button--outline-light" href="pages/track-complaint.html" data-i18n="track">Track Complaint</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div>
+        <a class="brand brand--footer" href="#top"><span class="brand__mark" aria-hidden="true"><span>CS</span></span><span class="brand__name">Cyber<span>Shield</span></span></a>
+        <p class="footer__disclosure" data-i18n="footerDisclosure">CyberShield is an independent reimagining of the cybercrime reporting experience created for a public-service innovation challenge. It is not an official government service.</p>
+      </div>
+      <nav aria-label="Action links"><h2>Take action</h2><a href="pages/report-crime.html" data-i18n="report">Report an incident</a><a href="pages/track-complaint.html" data-i18n="track">Track Complaint</a></nav>
+      <nav aria-label="Learning links"><h2>Learn</h2><a href="pages/learning.html" data-i18n="learn">Learning Corner</a><a href="#tips" data-i18n="safety">Safety guidance</a></nav>
+      <nav aria-label="Support links"><h2>Support</h2><a href="pages/faq.html">Privacy & FAQs</a><a href="pages/accessibility.html">Accessibility</a></nav>
+    </div>
+    <div class="container footer__legal">
+      <p>© <span data-current-year>2026</span> CyberShield.</p>
+    </div>
+  </footer>
+</body>
+</html>
