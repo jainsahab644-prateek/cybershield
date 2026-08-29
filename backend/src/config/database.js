@@ -550,7 +550,9 @@ function initializeDatabase() {
 
   database = new Database(databasePath);
   database.pragma('foreign_keys = ON');
-  database.pragma('journal_mode = WAL');
+  if (!process.env.NETLIFY) {
+    database.pragma('journal_mode = WAL');
+  }
   database.pragma('busy_timeout = 5000');
   runMigrations(database);
 
