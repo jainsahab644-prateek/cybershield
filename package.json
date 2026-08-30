@@ -2,5 +2,8 @@
   "name": "cybershield-portal-root",
   "version": "1.0.0",
   "private": true,
-  "description": "CyberShield Portal - root workspace. Backend is in /backend."
+  "description": "CyberShield Portal - root workspace. Backend is in /backend.",
+  "dependencies": {
+    "serverless-http": "^4.0.0"
+  }
 }
