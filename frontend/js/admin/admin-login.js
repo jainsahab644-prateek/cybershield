@@ -102,7 +102,7 @@
       showMessage('The administration demo is not enabled in this environment.');
       return;
     }
-    email.value = response.data.demoAdminEmail;
+    email.placeholder = response.data.demoAdminEmail || 'admin@cybershield.demo';
     document.querySelector('[data-admin-otp]').textContent = response.data.demoOtp || 'configured code';
   }).catch((error) => showMessage(error.message));
 })();
