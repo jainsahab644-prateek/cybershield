@@ -32,7 +32,7 @@ function createSessionMiddleware() {
     ...(store ? { store } : {}),
     cookie: {
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: production ? 'none' : 'lax',
       secure: production,
       maxAge: sessionMaxAge()
     }
