@@ -53,7 +53,13 @@ app.use(helmet({
 }));
 app.use(cors({
   origin(origin, callback) {
-    callback(null, !origin || env.clientOrigins.includes(origin));
+    if (!origin) return callback(null, true);
+    let host = '';
+    try { host = new URL(origin).host.toLowerCase(); } catch (err) { host = ''; }
+    const allowed = env.clientOrigins.some((item) => {
+      try { return new URL(item).host.toLowerCase() === host; } catch (err) { return item === origin; }
+    }) || host.endsWith('.netlify.app') || host.endsWith('.onrender.com');
+    callback(null, allowed);
   },
   methods: ['GET', 'POST', 'PATCH'],
   allowedHeaders: ['Content-Type', 'X-Request-ID'],

@@ -120,6 +120,7 @@
 }
 
 /* ─── Base Reset ─── */
+[hidden] { display: none !important; }
 *, *::before, *::after { box-sizing: border-box; }
 html { font-size: var(--root-font-size); scroll-behavior: smooth; scroll-padding-top: 8rem; }
 body {
