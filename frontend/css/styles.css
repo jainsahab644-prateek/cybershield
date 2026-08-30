@@ -213,27 +213,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .brand-row__promise { margin: 0; color: var(--ink-700); font-size: .83rem; font-weight: 700; }
 .brand-row__promise span { color: var(--mint-strong); margin-right: .4rem; }
 
-/* Dark mode toggle button */
-.dark-mode-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
-  background: var(--mist);
-  color: var(--text);
-  cursor: pointer;
-  transition: background var(--transition-smooth), border-color var(--transition-smooth), transform var(--transition-spring);
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-.dark-mode-toggle:hover { background: var(--mint); color: var(--ink-950); transform: rotate(20deg) scale(1.08); border-color: var(--mint-strong); }
-.dark-mode-toggle .icon-sun { display: none; }
-.dark-mode-toggle .icon-moon { display: block; }
-[data-theme="dark"] .dark-mode-toggle .icon-sun { display: block; }
-[data-theme="dark"] .dark-mode-toggle .icon-moon { display: none; }
+/* Dark mode toggle button (Disabled) */
+.dark-mode-toggle { display: none !important; }
 
 /* Hamburger Menu */
 .menu-button { display: none; align-items: center; gap: .5rem; border: 0; color: var(--ink-950); background: transparent; font-weight: 750; cursor: pointer; }
