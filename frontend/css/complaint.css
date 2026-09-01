@@ -49,10 +49,28 @@
 .breadcrumb span[aria-hidden] { opacity: .6; }
 
 .financial-emergency { padding-block: 1.5rem; color: var(--paper); background: var(--coral-dark); }
-.financial-emergency__inner { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; }
-.financial-emergency__icon { width: 3.25rem; height: 3.25rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; font-size: 1.25rem; font-weight: 850; }
-.financial-emergency strong, .financial-emergency span { display: block; }
-.financial-emergency span { margin-top: .2rem; color: #f7d8d4; font-size: .82rem; }
+.financial-emergency__inner { display: flex; align-items: center; gap: 1.25rem; }
+.financial-emergency__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.financial-emergency strong { display: block; color: #ffffff; font-size: 1.02rem; line-height: 1.4; }
+.financial-emergency div > span { display: block; margin-top: .25rem; color: #f7d8d4; font-size: .84rem; line-height: 1.45; }
 
 .form-section { padding-block: 3.5rem 6rem; }
 .form-loading {
