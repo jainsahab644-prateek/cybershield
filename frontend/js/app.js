@@ -68,6 +68,38 @@
     // Remove separate utility bar if present
     header?.querySelector('.utility-bar')?.remove();
 
+    if (header && !header.querySelector('.header-container')) {
+      const container = document.createElement('div');
+      container.className = 'header-container container';
+      const brand = header.querySelector('.brand');
+      const nav = header.querySelector('.main-nav');
+      let menuBtn = header.querySelector('.menu-button');
+
+      if (!menuBtn) {
+        menuBtn = document.createElement('button');
+        menuBtn.className = 'menu-button';
+        menuBtn.type = 'button';
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-controls', 'primary-navigation');
+        const icon = document.createElement('span');
+        const text = document.createElement('span');
+        icon.className = 'menu-button__icon';
+        icon.setAttribute('aria-hidden', 'true');
+        text.dataset.i18n = 'menu';
+        text.textContent = 'Menu';
+        menuBtn.append(icon, text);
+      }
+
+      if (brand) container.append(brand);
+      if (nav) container.append(nav);
+      container.append(menuBtn);
+
+      const brandRow = header.querySelector('.brand-row');
+      if (brandRow) brandRow.remove();
+
+      header.append(container);
+    }
+
     if (!header) {
       header = document.createElement('header');
       header.className = 'site-header';
