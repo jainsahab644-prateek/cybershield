@@ -7,8 +7,8 @@ const { categoryLabels } = require('./incidentTaxonomy');
 const { classifyMock, redactSecrets } = require('./complaintAssistant.service');
 
 const ACTIONS = Object.freeze({
-  report_incident: { type: 'navigate', label: 'Start Demo Report', target: '/pages/report-crime.html' },
-  track_complaint: { type: 'navigate', label: 'Track Demo Complaint', target: '/pages/track-complaint.html' },
+  report_incident: { type: 'navigate', label: 'Start Incident Report', target: '/pages/report-crime.html' },
+  track_complaint: { type: 'navigate', label: 'Track Complaint', target: '/pages/track-complaint.html' },
   financial_report: { type: 'navigate', label: 'Start Financial Fraud Report', target: '/pages/financial-fraud.html' },
   safety_report: { type: 'navigate', label: 'Start Safety-Related Report', target: '/pages/safety-related.html' },
   other_report: { type: 'navigate', label: 'Start Other Cybercrime Report', target: '/pages/other-cybercrime.html' },
@@ -52,19 +52,19 @@ function mockResponse(message) {
     return { message: 'I can’t help find or reveal someone’s private address or personal information. I can help you document concerning online activity without invading anyone’s privacy.', actionIds: ['report_incident'] };
   }
   if (/\bhack\b|hack into|break into|steal (?:their )?password|take over .*account/.test(text)) {
-    return { message: 'I can’t provide instructions for accessing or damaging another account. Preserve messages and account details, secure your own accounts, and use the demo reporting journey to document what happened.', actionIds: ['report_incident', 'learning_corner'] };
+    return { message: 'I can’t provide instructions for accessing or damaging another account. Preserve messages and account details, secure your own accounts, and use the reporting journey to document what happened.', actionIds: ['report_incident', 'learning_corner'] };
   }
   if (/track|reference id|complaint status/.test(text)) {
-    return { message: 'Open Track Demo Complaint and enter the CyberShield reference ID created after a demo submission. Tracking shows a synthetic status only; no authority is contacted.', actionIds: ['track_complaint'] };
+    return { message: 'Open Track Complaint and enter the CyberShield reference ID created after a submission. Tracking shows status information.', actionIds: ['track_complaint'] };
   }
   if (/evidence|upload|screenshot|prepare/.test(text)) {
-    return { message: 'Useful evidence may include screenshots, message text, usernames, profile or website links, dates, order or transaction references, and the platform involved. Upload only fictional JPG, PNG, or PDF files in this prototype. Never include passwords, OTPs, PINs, CVVs, or recovery codes.', actionIds: ['report_incident'] };
+    return { message: 'Useful evidence may include screenshots, message text, usernames, profile or website links, dates, order or transaction references, and the platform involved. Upload only JPG, PNG, or PDF files. Never include passwords, OTPs, PINs, CVVs, or recovery codes.', actionIds: ['report_incident'] };
   }
   if (/what is phishing|phishing mean/.test(text)) {
     return { message: 'Phishing is a deceptive message or website that tries to make you reveal information, open a harmful link, or approve a payment. Pause, verify through a trusted channel, and do not enter credentials from an unexpected link.', actionIds: ['phishing_guide', 'learning_corner'] };
   }
   if (/prototype|how .*work|official|government|police/.test(text)) {
-    return { message: 'CyberShield is an educational hackathon prototype, not a government or police service. It guides a fictional report, creates a demo reference ID, and shows mock tracking. Nothing is submitted to an authority.', actionIds: ['report_incident', 'track_complaint'] };
+    return { message: 'CyberShield is an educational platform, not a government or police service. It guides an incident report, creates a reference ID, and shows status tracking.', actionIds: ['report_incident', 'track_complaint'] };
   }
   if (/safety help|stay safe|cyber safety/.test(text)) {
     return { message: 'Pause before acting, verify unexpected requests through a channel you already trust, protect credentials, and record useful details safely. For immediate danger, contact the appropriate local emergency service.', actionIds: ['learning_corner'] };

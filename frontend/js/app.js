@@ -64,15 +64,21 @@
     if (window.location.pathname.includes('/admin/')) return;
     const insidePages = window.location.pathname.includes('/pages/');
     let header = document.querySelector('.site-header');
+    
+    // Remove separate utility bar if present
+    header?.querySelector('.utility-bar')?.remove();
+
     if (!header) {
       header = document.createElement('header');
       header.className = 'site-header';
-      const brandRow = document.createElement('div');
+      const container = document.createElement('div');
       const brand = document.createElement('a');
       const mark = document.createElement('span');
       const markText = document.createElement('span');
       const name = document.createElement('span');
-      brandRow.className = 'brand-row container';
+      const tagline = document.createElement('small');
+
+      container.className = 'header-container container';
       brand.className = 'brand';
       brand.href = insidePages ? '../index.html' : 'index.html';
       brand.setAttribute('aria-label', 'CyberShield home');
@@ -80,40 +86,69 @@
       mark.setAttribute('aria-hidden', 'true');
       markText.textContent = 'CS';
       name.className = 'brand__name';
-      name.append('Cyber', Object.assign(document.createElement('span'), { textContent: 'Shield' }));
+      tagline.textContent = insidePages ? 'Awareness • Support • Action' : 'Clear guidance for safer action';
+      name.append('Cyber', Object.assign(document.createElement('span'), { textContent: 'Shield' }), tagline);
       mark.append(markText);
       brand.append(mark, name);
-      brandRow.append(brand);
+      container.append(brand);
+
       const navigation = document.createElement('nav');
       const navigationInner = document.createElement('div');
       navigation.className = 'main-nav';
       navigation.id = 'primary-navigation';
       navigation.setAttribute('aria-label', 'Main navigation');
-      navigationInner.className = 'container main-nav__inner';
+      navigationInner.className = 'main-nav__inner';
       const links = [
         ['Home', insidePages ? '../index.html' : 'index.html'],
         ['Report an incident', insidePages ? 'report-crime.html' : 'pages/report-crime.html'],
         ['Track Complaint', insidePages ? 'track-complaint.html' : 'pages/track-complaint.html'],
-        ['Learning Corner', insidePages ? 'learning.html' : 'pages/learning.html']
+        ['How it works', insidePages ? '../index.html#how-it-works' : '#how-it-works'],
+        ['Learning Corner', insidePages ? 'learning.html' : 'pages/learning.html'],
+        ['Help', insidePages ? '../index.html#help' : '#help'],
+        ['Sign in', insidePages ? 'login.html' : 'pages/login.html']
       ];
       links.forEach(([label, href]) => {
         const link = document.createElement('a');
         link.href = href;
         link.textContent = label;
-        if (new URL(href, window.location.href).pathname === window.location.pathname) {
+        if (label === 'Sign in') link.dataset.authVisible = 'guest';
+        if (new URL(href, window.location.href).pathname === window.location.pathname && !href.includes('#')) {
           link.className = 'is-active';
           link.setAttribute('aria-current', 'page');
         }
         navigationInner.append(link);
       });
+
+      const dashboardLink = document.createElement('a');
+      dashboardLink.href = insidePages ? 'dashboard.html' : 'pages/dashboard.html';
+      dashboardLink.textContent = 'My Complaints';
+      dashboardLink.dataset.authVisible = 'user';
+      dashboardLink.hidden = true;
+      navigationInner.append(dashboardLink);
+
       navigation.append(navigationInner);
-      header.append(brandRow, navigation);
+      container.append(navigation);
+
+      const button = document.createElement('button');
+      const icon = document.createElement('span');
+      const text = document.createElement('span');
+      button.className = 'menu-button';
+      button.type = 'button';
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', 'primary-navigation');
+      icon.className = 'menu-button__icon';
+      icon.setAttribute('aria-hidden', 'true');
+      text.textContent = 'Menu';
+      button.append(icon, text);
+      container.append(button);
+
+      header.append(container);
       document.querySelector('main')?.before(header);
     }
 
-    const brandRow = header.querySelector('.brand-row');
+    const headerContainer = header.querySelector('.header-container, .brand-row');
     const navigation = header.querySelector('.main-nav');
-    if (brandRow && navigation && !brandRow.querySelector('.menu-button')) {
+    if (headerContainer && navigation && !headerContainer.querySelector('.menu-button')) {
       const button = document.createElement('button');
       const icon = document.createElement('span');
       const text = document.createElement('span');
@@ -126,7 +161,7 @@
       icon.setAttribute('aria-hidden', 'true');
       text.textContent = 'Menu';
       button.append(icon, text);
-      brandRow.append(button);
+      headerContainer.append(button);
     }
 
     let footer = document.querySelector('.site-footer');

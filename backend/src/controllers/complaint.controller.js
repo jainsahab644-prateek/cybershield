@@ -11,7 +11,7 @@ async function createComplaint(request, response, next) {
     );
     return sendSuccess(response, {
       statusCode: 201,
-      message: 'Demo report submitted successfully.',
+      message: 'Report submitted successfully.',
       data: complaint
     });
   } catch (error) {

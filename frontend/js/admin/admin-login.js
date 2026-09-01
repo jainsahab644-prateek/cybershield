@@ -99,10 +99,10 @@
   window.CyberShieldAuthApi.getDevelopmentConfig().then((response) => {
     if (!response.data.demoMode || !response.data.demoAdminEmail) {
       requestForm.querySelector('[type="submit"]').disabled = true;
-      showMessage('The administration demo is not enabled in this environment.');
+      showMessage('The administration panel is not enabled in this environment.');
       return;
     }
-    email.placeholder = response.data.demoAdminEmail || 'admin@cybershield.demo';
+    email.placeholder = response.data.demoAdminEmail || 'admin@cybershield.com';
     document.querySelector('[data-admin-otp]').textContent = response.data.demoOtp || 'configured code';
   }).catch((error) => showMessage(error.message));
 })();

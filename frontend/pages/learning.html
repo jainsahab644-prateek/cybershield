@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Plain-language cyber safety guides, scam warning signs, and practical digital safety tips from the CyberShield educational demo.">
+  <meta name="description" content="Plain-language cyber safety guides, scam warning signs, and practical digital safety tips from CyberShield.">
   <title>Learning Corner | CyberShield</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/styles.css?v=phase9-v2">
   <link rel="stylesheet" href="../css/learning.css?v=learning-refresh">
@@ -15,8 +15,28 @@
 <body class="learning-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
-  <div class="brand-row container"><a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"><span>CS</span></span><span class="brand__name">Cyber<span>Shield</span><small>Awareness • Support • Action</small></span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation"><span class="menu-button__icon"></span><span>Menu</span></button></div>
-  <nav class="main-nav" id="primary-navigation"><div class="container main-nav__inner"><a href="../index.html">Home</a><a class="is-active" aria-current="page" href="learning.html">Learning Corner</a><a href="faq.html">FAQs</a><a href="announcements.html">Announcements</a><a href="report-crime.html">Report an incident</a></div></nav>
+  <div class="header-container container">
+    <a class="brand" href="../index.html" aria-label="CyberShield home">
+      <span class="brand__mark" aria-hidden="true"><span>CS</span></span>
+      <span class="brand__name">Cyber<span>Shield</span><small>Awareness • Support • Action</small></span>
+    </a>
+    <nav class="main-nav" id="primary-navigation" aria-label="Main navigation">
+      <div class="main-nav__inner">
+        <a href="../index.html" data-i18n="home">Home</a>
+        <a href="report-crime.html" data-i18n="report">Report an incident</a>
+        <a href="track-complaint.html" data-i18n="track">Track Complaint</a>
+        <a href="../index.html#how-it-works" data-i18n="howWorks">How it works</a>
+        <a class="is-active" aria-current="page" href="learning.html" data-i18n="learn">Learning Corner</a>
+        <a href="../index.html#help" data-i18n="help">Help</a>
+        <a href="login.html" data-auth-visible="guest" data-i18n="signIn">Sign in</a>
+        <a href="dashboard.html" data-auth-visible="user" data-i18n="myComplaints" hidden>My Complaints</a>
+      </div>
+    </nav>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <span class="menu-button__icon" aria-hidden="true"></span>
+      <span data-i18n="menu">Menu</span>
+    </button>
+  </div>
 </header>
 <main id="main-content">
   <section class="knowledge-hero"><div class="container knowledge-hero__layout"><div class="knowledge-hero__copy"><p class="knowledge-kicker">Cyber safety, explained clearly</p><h1>Learn. Recognize.<br><span>Stay Safer Online.</span></h1><p>Simple guides and practical tips to help you understand common online risks and make safer digital decisions.</p><div class="knowledge-hero__actions"><a class="button button--primary" href="#featured-title">Explore guides</a><a class="knowledge-text-link" href="#quick-tips">View quick safety tips <span aria-hidden="true">↓</span></a></div><p class="knowledge-hero__note"><span aria-hidden="true">✓</span> Plain-language guidance for everyday digital life</p></div><figure class="knowledge-hero__visual"><img src="../assets/images/learning/hero-learning.webp" width="1200" height="800" alt="Illustration of a citizen using a mobile phone protected by a digital shield."></figure></div></section>
@@ -30,6 +50,6 @@
   <section class="learning-section container" aria-labelledby="faq-title"><div class="learning-section__heading"><div><p class="section-label">Need a quick answer?</p><h2 id="faq-title">Frequently asked questions</h2><p>Clear answers about reporting, safer next steps, and this educational service.</p></div><a class="button button--secondary" href="faq.html">Browse all FAQs</a></div><div id="learning-faqs" class="faq-preview" aria-live="polite"></div></section>
   <section class="learning-band learning-band--resources" aria-labelledby="resource-title"><div class="container learning-section"><div class="learning-section__heading"><div><p class="section-label">Further reading</p><h2 id="resource-title">Useful resources</h2><p>External resources open in a new tab and are clearly labelled.</p></div></div><div id="resource-grid" class="resource-grid"></div></div></section>
 </main>
-<footer class="site-footer"><div class="container footer__legal"><p>Learning content is created for demonstration and education.</p><p>Not an official government or police advisory.</p></div></footer>
+<footer class="site-footer"><div class="container footer__legal"><p>Learning content is created for education.</p><p>Not an official government or police advisory.</p></div></footer>
 </body>
 </html>
