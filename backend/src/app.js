@@ -48,7 +48,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com']
     }
   },
-  crossOriginResourcePolicy: { policy: 'same-site' },
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
 }));
 app.use(cors({

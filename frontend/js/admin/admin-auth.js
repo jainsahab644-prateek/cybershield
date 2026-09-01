@@ -10,6 +10,7 @@
   }
 
   function applyAdminUI(user) {
+    document.body.classList.add('admin-authenticated');
     const nested = window.location.pathname.includes('/admin/content/');
     document.querySelectorAll('[data-admin-name]').forEach((element) => {
       element.textContent = user.fullName;

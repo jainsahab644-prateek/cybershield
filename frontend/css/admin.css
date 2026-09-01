@@ -1,5 +1,6 @@
 .admin-body { min-height: 100vh; color: var(--text); background: var(--cloud); }
-.admin-shell { min-height: calc(100vh - 2.4rem); display: grid; grid-template-columns: 16rem minmax(0, 1fr); }
+.admin-shell { min-height: calc(100vh - 2.4rem); display: grid; grid-template-columns: 16rem minmax(0, 1fr); transition: opacity .15s ease; }
+body:not(.admin-authenticated):not(.admin-login-page) .admin-shell { opacity: 0; visibility: hidden; pointer-events: none; }
 .admin-sidebar { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; padding: 1.5rem; color: #dce8e5; background: var(--ink-950); }
 .admin-brand { display: flex; align-items: center; gap: .7rem; padding-bottom: 1.4rem; color: var(--paper); border-bottom: 1px solid #294852; text-decoration: none; }
 .admin-brand .brand__mark { width: 2.7rem; height: 3rem; }
