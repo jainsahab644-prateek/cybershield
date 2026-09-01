@@ -40,8 +40,18 @@
   }
 
   async function prepareCode() {
-    const response = await window.CyberShieldAuthApi.requestOtp('email', email.value);
-    startCountdown(response.data.resendAfterSeconds);
+    let resendAfter = 30; // default fallback
+    try {
+      const response = await window.CyberShieldAuthApi.requestOtp('email', email.value);
+      resendAfter = response.data.resendAfterSeconds;
+    } catch (error) {
+      // If a code was already issued within the cooldown window (e.g. by the
+      // auto-login on a protected page), the server returns 429 with the message
+      // "Please wait before requesting another verification code."
+      // The existing OTP is still valid for 5 minutes — just advance the user.
+      if (error?.status !== 429) throw error;
+    }
+    startCountdown(resendAfter);
     requestForm.hidden = true;
     verifyForm.hidden = false;
     document.querySelector('#admin-otp').focus();

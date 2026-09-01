@@ -46,12 +46,33 @@
               if (devConfig?.data?.demoMode && devConfig?.data?.demoAdminEmail) {
                 const demoEmail = devConfig.data.demoAdminEmail;
                 const demoOtp = devConfig.data.demoOtp || '123456';
-                await window.CyberShieldAuthApi.requestOtp('email', demoEmail).catch(() => {});
-                await window.CyberShieldAuthApi.verifyOtp('email', demoEmail, demoOtp, 'CyberShield Administrator');
-                const retry = await window.CyberShieldAuthApi.getCurrentUser();
-                if (retry?.data?.user?.role === 'admin') {
-                  applyAdminUI(retry.data.user);
-                  return retry.data.user;
+
+                // Try to verify with an existing OTP first (avoids burning the 30-second
+                // cooldown and rate limit quota that blocks the manual login page).
+                // Only request a new OTP code if verify fails due to expired / no active code.
+                let verified = false;
+                try {
+                  await window.CyberShieldAuthApi.verifyOtp('email', demoEmail, demoOtp, 'CyberShield Administrator');
+                  verified = true;
+                } catch (verifyErr) {
+                  // Code was invalid or expired — request a fresh one and try once more.
+                  if (verifyErr?.status === 400 || verifyErr?.status === 429) {
+                    try {
+                      await window.CyberShieldAuthApi.requestOtp('email', demoEmail);
+                      await window.CyberShieldAuthApi.verifyOtp('email', demoEmail, demoOtp, 'CyberShield Administrator');
+                      verified = true;
+                    } catch (_) {
+                      // Fall through to login redirect
+                    }
+                  }
+                }
+
+                if (verified) {
+                  const retry = await window.CyberShieldAuthApi.getCurrentUser();
+                  if (retry?.data?.user?.role === 'admin') {
+                    applyAdminUI(retry.data.user);
+                    return retry.data.user;
+                  }
                 }
               }
             } catch (autoAuthErr) {
